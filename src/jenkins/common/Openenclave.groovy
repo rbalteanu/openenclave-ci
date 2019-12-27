@@ -28,7 +28,7 @@ def ContainerRun(String imageName, String compiler, String task, String runArgs=
     }
 }
 
-def azureEnvironment(String task, String imageName = "oetools-deploy:latest") {
+def azureEnvironment(String task, String imageName = "oetools-deploy:terraform") {
     withCredentials([usernamePassword(credentialsId: 'SERVICE_PRINCIPAL_OSTCLAB',
                                       passwordVariable: 'SERVICE_PRINCIPAL_PASSWORD',
                                       usernameVariable: 'SERVICE_PRINCIPAL_ID'),
@@ -79,7 +79,7 @@ def Run(String compiler, String task) {
     }
 }
 
-def deleteRG(List resourceGroups, String imageName = "oetools-deploy:latest") {
+def deleteRG(List resourceGroups, String imageName = "oetools-deploy:terraform") {
     stage("Delete ${resourceGroups.toString()} resource groups") {
         resourceGroups.each { rg ->
             withEnv(["RESOURCE_GROUP=${rg}"]) {
